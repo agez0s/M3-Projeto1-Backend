@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+router.use(express.urlencoded());
+
 const listaFilmes = [];
 
 let filmeDefault = {
@@ -30,8 +32,13 @@ router.get("/:id", (req,res) =>{
 // [POST] /vagas/add - Cadastro de uma nova vaga
 router.post('/add', (req, res) => {
     // recebi o objeto da vaga para cadastar vinda do cliente (via requisicao http POST)
-    const filme = req.body;
+    const { nome, genero, imagem, nota } = req.body;
+    const filme = { nome, genero, imagem, nota };
+    console.log(filme)
+    console.log("---")
+    console.log(req.body)
     filme.id = Date.now();
+    filme.assistido = false;
     listaFilmes.push(filme)
     res.status(201).send({
         message: 'Cadastro com sucesso',
