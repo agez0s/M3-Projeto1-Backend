@@ -4,7 +4,7 @@ const router = express.Router();
 const listaFilmes = [];
 
 let filmeDefault1 = {
-    id: 1,
+    id: "1",
     nome: "A Origem",
     imagem: "https://m.media-amazon.com/images/I/61AFbsFwh7L._AC_SX679_.jpg",
     genero: "Ação",
@@ -13,7 +13,7 @@ let filmeDefault1 = {
 }
 
 let filmeDefault2 = {
-    id: 2,
+    id: "2",
     nome: "Dunkirk",
     imagem: "https://m.media-amazon.com/images/I/91a9Ez60pmL._AC_SL1500_.jpg",
     genero: "Ação",
@@ -22,7 +22,7 @@ let filmeDefault2 = {
 }
 
 let filmeDefault3 = {
-    id: 3,
+    id: "3",
     nome: "Interstellar",
     imagem: "https://http2.mlstatic.com/D_NQ_NP_692718-MLB25904741171_082017-O.jpg",
     genero: "Ficção Científica",
@@ -31,7 +31,7 @@ let filmeDefault3 = {
 }
 
 let filmeDefault4 = {
-    id: 4,
+    id: "4",
     nome: "Tenet",
     imagem: "https://www.dhresource.com/0x0/f2/albu/g9/M01/5F/6B/rBVaVV7ymemAYPpjAAf0MizyWz8093.jpg/2020-new-tenet-poster-silk-movie-art-film.jpg",
     genero: "Aventura",
@@ -73,8 +73,8 @@ router.post('/add', (req, res) => {
     }
     
     const idAleatorio = () => {
-        const dateString = Date.now().toString(36);
-        const aleatorio = Math.random().toString(36).substr(2);
+        const dateString = Date.now();
+        const aleatorio = Math.random();
         return dateString + aleatorio;
       };
     filme.id = idAleatorio();
