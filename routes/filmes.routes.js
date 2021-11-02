@@ -71,7 +71,13 @@ router.post('/add', (req, res) => {
         res.status(400).send({message: `Filme inválido! Preencha os campos corretamente. Enviado: ${filme} ${filme.nome} ${filme.genero} ${filme.nota}`});
         return;
     }
-    filme.id = Date.now();
+    
+    const idAleatorio = () => {
+        const dateString = Date.now().toString(36);
+        const aleatorio = Math.random().toString(36).substr(2);
+        return dateString + aleatorio;
+      };
+    filme.id = idAleatorio();
     filme.assistido = false;
     listaFilmes.push(filme)
     res.status(201).send({
