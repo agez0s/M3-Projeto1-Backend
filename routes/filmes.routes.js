@@ -47,7 +47,7 @@ listaFilmes.push(filmeDefault4)
 
 
 router.get("/", (req,res) => {
-    res.send(listaFilmes);
+    res.status(200).send(listaFilmes);
 })
 
 router.get("/:id", (req,res) =>{
@@ -59,7 +59,7 @@ router.get("/:id", (req,res) =>{
         res.status(404).send({error: "Filme não encontrado"});
         return;
     }
-    res.send(filme);
+    res.status(200).send(filme);
 })
 
 // [POST] /vagas/add - Cadastro de uma nova vaga
@@ -106,7 +106,7 @@ router.put('/editar/:id', (req, res) => {
         ...filmeEdit
     }
 
-    res.send({
+    res.status(200).send({
         message: `Filme ${listaFilmes[index].nome} atualizado com sucesso`,
         data: listaFilmes[index]
     })
@@ -119,7 +119,7 @@ router.delete('/delete/:id', (req, res) => {
     const index = listaFilmes.findIndex(filme => filme.id == idParam);
     const filmeDeletado = listaFilmes[index];
     listaFilmes.splice(index, 1);
-    res.send({
+    res.status(200).send({
         message: `Filme ${filmeDeletado.nome} excluído com sucesso !`,
     })
 })
