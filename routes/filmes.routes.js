@@ -3,6 +3,8 @@ const router = express.Router();
 
 const listaFilmes = [];
 
+//adicionei 4 filmes iniciais, para popular a lista
+
 let filmeDefault1 = {
     id: "1",
     nome: "A Origem",
@@ -62,7 +64,6 @@ router.get("/:id", (req,res) =>{
     res.status(200).send(filme);
 })
 
-// [POST] /vagas/add - Cadastro de uma nova vaga
 router.post('/add', (req, res) => {
     // recebi o objeto da vaga para cadastar vinda do cliente (via requisicao http POST)
     const { nome, genero, imagem, nota } = req.body;
@@ -72,11 +73,12 @@ router.post('/add', (req, res) => {
         return;
     }
     
+    //Como não estamos usando um DB, constrói um ID aleatório pra certificar que não terá 2 IDs iguais
     const idAleatorio = () => {
         const dateString = Date.now();
         const aleatorio = Math.random();
         return dateString + aleatorio;
-      };
+    };
     filme.id = idAleatorio();
     filme.assistido = false;
     listaFilmes.push(filme)
@@ -87,11 +89,8 @@ router.post('/add', (req, res) => {
 })
 
 router.put('/editar/:id', (req, res) => {
-    // o objeto que veio do front para atualizar a vaga com o id recebido
     const filmeEdit = req.body;
-    // o id recebido via parametro
     const idParam = req.params.id;
-    // procura o indice da vaga pre cadastrada na lista de acordo com o id recebido para atualizala
     let index = listaFilmes.findIndex(filme => filme.id == idParam);
 
     if (index < 0) {
@@ -99,8 +98,6 @@ router.put('/editar/:id', (req, res) => {
         return;
     }
 
-    // spread operator ...
-    // faz um espelho do item na lista e um espelho do objeto atualizado e junta os 2
     listaFilmes[index] = {
         ...listaFilmes[index],
         ...filmeEdit
@@ -113,7 +110,6 @@ router.put('/editar/:id', (req, res) => {
 })
 
 router.delete('/delete/:id', (req, res) => {
-    // acessamos o id recebido via parametro
     const idParam = req.params.id;
 
     const index = listaFilmes.findIndex(filme => filme.id == idParam);

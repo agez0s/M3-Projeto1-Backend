@@ -11,9 +11,6 @@ app.use(cors());
 
 app.use('/filmes', filmesRouter);
 
-app.get("/", (req,res) => {
-    res.send("Olá Turma");
-})
 
 app.listen(port, () => {
     console.log(`Rodando servidor em http://localhost:${port}`);
